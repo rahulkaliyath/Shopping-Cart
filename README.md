@@ -1,6 +1,7 @@
 # Shopping-Cart
 Shopping-Cart
 
+Follow https://shopping-cart-py.herokuapp.com to view in your browser
 
 Requirements:
 Python3
