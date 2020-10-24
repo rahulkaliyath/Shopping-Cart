@@ -15,4 +15,4 @@ Instructions
 
 4.Type python3 run.py and press enter
 
-5.Once exceuted go to http://127.0.0.1:5000/ in your browser
+5.Once executed go to http://127.0.0.1:5000/ in your browser
