@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="./static/assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
+    <title>Store</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="javascript:void(0)"onclick="openNav()">
+          <i class="fa fa-shopping-cart" ></i>
+        Cart {{cart|length}}</a>
+      </div>
+
+      <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      
+        {% if cart|length ==0 %}
+        <div class="cart-empty">
+          <i class="fa fa-shopping-cart" style="font-size: 50px;"></i>
+            <h2>Cart Empty</h2>
+        </div>  
+        {% else %}
+
+        <form action="empty_cart">
+          <div class="checkout">
+            <button class="button-cart">Clear Cart</button>
+          </div>
+        </form>
+     
+        {% for item in cart %}
+        <form   method="POST"  action="/update_quantity" >
+        <div class="item">
+            <div class="image">
+              <img src="../static/images/{{item._id}}.jpg" alt="" />
+            </div>
+         
+            <div class="description">
+              <span>{{item.name}}</span>
+              <span>₹{{item.price}}</span>
+            </div>
+            
+            <div class="quantity">
+              <button class="minus-btn" type="button" name="button" id="cart-minus-id-{{item._id}}">
+               -
+              </button>
+              <input type="hidden" value="{{ item._id}}" name="prod_id">
+              <input type="text" name="cart_qty" value="{{item.quantity}}" id="cart-qty-id-{{item._id}}">
+              <button class="plus-btn" type="button" name="button" id="cart-plus-id-{{item._id}}">
+                +
+              </button>
+            </div>
+         
+            <div class="total-price">₹{{item.price * item.quantity}}</div>
+            <div class="quantity"> 
+                <button class="plus-btn" type="submit" name="update" value="updated_cart">
+                  <i class="fa fa-check" style="font-size: 30px;" aria-hidden="true"></i>
+                </button>
+                <button class="plus-btn" type="submit" name="update" value="delete_item">
+                  <i class="fa fa-trash" style="font-size: 30px;" aria-hidden="true"></i>
+                </button>
+            </div>
+        
+        </div>
+      </form>
+        {% endfor %}
+
+
+        {% endif %}
+      </div>
+
+     
+    
+
+
+      <div class="row">
+          {% for item in items %}
+          <form method="POST" action="/update">
+        <div class="column">
+            <div class="card" >
+                <img src="../static/images/{{item._id}}.jpg " alt="Avatar" style="width:100%">
+                <div class="container">
+                    <p class="item_name">{{ item.name }}</p>
+                    <p class="price">₹{{ item.price }}</p> 
+                    <div class="input-group">
+                        <input type="hidden" value="{{ item._id}}" name="prod_id">
+                        <input type="button" value="-" class="button-minus" data-field="quantity" id="minus-id-{{item._id}}">
+                        <input type="number" step="1" min="1" value="1" name="quantity" class="quantity-field" id="qty-prod-id-{{item._id}}">
+                        <input type="button" value="+" class="button-plus" data-field="quantity" id="plus-prod-id-{{item._id}}">
+                    </div>
+      
+                    <div class="div_button"><button class="button-cart">Add to Cart</button></div>
+                </div>
+            </div>
+        </div>
+    </form>
+        {% endfor %}
+      </div> 
+        <footer>
+         <h3 style="text-align: center; padding-top:35px; color: #a9aeb0;">Shopping Cart Using Python and MongoDb</h3>
+        </footer>
+      <script type="text/javascript" src="../static/home.js"></script>   
+
+</body>
+
+</html>
