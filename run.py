@@ -3,7 +3,7 @@ import json
 import pymongo
 from pymongo import MongoClient
 
-cluster=MongoClient("mongodb+srv://user1:user123@cluster0.u7x8t.mongodb.net/<dbname>?retryWrites=true&w=majority")
+cluster=MongoClient("mongodb+srv:/")
 db= cluster['Online_Store']
 store = db['store']
 cart = db['cart']
